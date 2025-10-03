@@ -1,10 +1,10 @@
-from math.pickrandomplay import pick_random_play
+from math_scripts.pickrandomplay import pick_random_play
 from Slideshows.play_slideshow_prethrow import play_slideshow_prethrow
 from Slideshows.play_slideshow_postthrow import play_post_simple
 from Slideshows.play_slideshow_both import play_full_slideshow
 from OffensePredictions.OffenseBall import calculate_offense_trajectory
 from OffensePredictions.OffenseActual import calculate_offense_actual_trajectory
-from math.calcrmse import calculate_play_rmse
+from math_scripts.calcrmse import calculate_play_rmse
 from defensepredictions.determinedefense import determinedefense
 
 if __name__ == "__main__":

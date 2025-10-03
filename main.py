@@ -1,11 +1,11 @@
-from pickrandomplay import pick_random_play
-from play_slideshow_prethrow import play_slideshow_prethrow
-from play_slideshow_postthrow import play_post_simple
-from play_slideshow_both import play_full_slideshow
-from OffenseBall import calculate_offense_trajectory
-from OffenseActual import calculate_offense_actual_trajectory
-from calcrmse import calculate_play_rmse
-from determinedefense import determinedefense
+from math.pickrandomplay import pick_random_play
+from Slideshows.play_slideshow_prethrow import play_slideshow_prethrow
+from Slideshows.play_slideshow_postthrow import play_post_simple
+from Slideshows.play_slideshow_both import play_full_slideshow
+from OffensePredictions.OffenseBall import calculate_offense_trajectory
+from OffensePredictions.OffenseActual import calculate_offense_actual_trajectory
+from math.calcrmse import calculate_play_rmse
+from defensepredictions.determinedefense import determinedefense
 
 if __name__ == "__main__":
 
@@ -28,10 +28,12 @@ if __name__ == "__main__":
     print(f"Mean RMSE over {n_runs} random plays: {mean_rmse:.4f}")
     '''
 
+
     pre, post, game_id, play_id = pick_random_play()
-    predicted_df, nfl_id = calculate_offense_trajectory(pre, game_id, play_id)
+
+    #predicted_df, nfl_id = calculate_offense_trajectory(pre, game_id, play_id)
     #print(determinedefense(pre, game_id, play_id))
 
-    #play_full_slideshow(pre, post, game_id, play_id)
-    play_slideshow_prethrow(pre, game_id, play_id)
-    play_post_simple(post, game_id, play_id)
+    play_full_slideshow(pre, post, game_id, play_id)
+    #play_slideshow_prethrow(pre, game_id, play_id)
+    #play_post_simple(post, game_id, play_id)

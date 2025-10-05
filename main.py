@@ -10,7 +10,11 @@ from OffensePredictions.Offenseballother import calculate_offense_trajectory_bal
 from Slideshows.sidebyslideshow import compare_slideshows
 from math_scripts.FramebyFrameerror import calculate_frame_errors
 from Models.fit_play_parabola import fit_play_parabola
-from Models.lo import train_linearoffense
+from Models.lo import predict_play_trajectory
+from Models.lo import train_parabola_predictor
+from Models.lo import evaluate_random_plays
+
+
 if __name__ == "__main__":
 
     '''
@@ -38,8 +42,22 @@ if __name__ == "__main__":
     print(f"Mean RMSE over {n_runs} random plays OTHER: {mean_rmse_other:.4f}")
     '''
 
-
     pre, post, game_id, play_id = pick_random_play()
-    print(train_linearoffense(pre, post, game_id, play_id))
+    predicted_df, nfl_id = calculate_offense_trajectory(pre, game_id, play_id)
+    predicted_df_other,nfl_id = calculate_offense_trajectory_ball_other(pre, game_id, play_id)
+    actual_df = calculate_offense_actual_trajectory(post, game_id, play_id, nfl_id)
+    rmse = calculate_play_rmse(actual_df, predicted_df)
+    rmse_other = calculate_play_rmse(actual_df, predicted_df_other)
+
+    print(rmse, rmse_other)
+    play_slideshow_prethrow(pre, game_id, play_id)
+    play_post_simple(predicted_df, game_id, play_id)
+    play_post_simple(predicted_df_other, game_id, play_id)
+    play_full_slideshow(pre, post, game_id, play_id)
+
+
+    #model, X, Y, preds = train_parabola_predictor(n_runs=200)
+    #frame_errors_list = evaluate_random_plays(model, n_runs=200)
+
 
 
